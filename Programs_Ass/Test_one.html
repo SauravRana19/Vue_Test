@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test_one</title>
+
+    <!--Vue_CDN-->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Vue_Validation_CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/vee-validate@<3.0.0/dist/vee-validate.js"></script>
+
+</head>
+<body>
+    <div id='vue_app'>
+        <h1>{{title}}</h1>
+        <ol>
+            <li v-for="(elem,index) in list" :key="index">
+                {{elem}}
+                <button @click='delete_item(index)'>delete</button>
+            </li>
+        </ol>
+        <input  v-validate="'required|names'" name="names" type="text" v-model="new_list">
+      
+        <button @click="add_list">add</button>
+    </div>
+    <script>
+        let app = Vue.createApp({
+            data() {
+                return {
+                    title: 'Vue_Test',
+                    new_list:'',list: ['saurav', 'peeyush', 'akshay',
+                            'vishnu', 'preeti', 'sonal', 
+                            'parshant', 'gorav',
+                            'raju', 'sham' ]                        
+                }
+            },
+            methods: {
+                delete_item(index) {
+                    this.list.splice(index,1)
+                },
+                add_list(){
+                    this.list.push(this.new_list)
+                }
+            }
+        })
+
+        let vm = app.mount('#vue_app')
+    </script>
+    <script>
+        Vue.use(VeeValidate); // good to go.
+      </script>
+    <style>
+        body {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-size: 5vh;
+            margin-left: 40%;
+            color: #48a94b;
+            background-color: rgba(181, 239, 239, 0.593);
+        }
+
+        li {
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            text-transform: uppercase;
+            color: black;
+
+        }
+    </style>
+</body>
+
+</html>
