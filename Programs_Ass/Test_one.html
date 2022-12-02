@@ -18,14 +18,17 @@
     <div id='vue_app'>
         <h1>{{title}}</h1>
         <ol>
-            <li v-for="(elem,index) in list" :key="index">
+            <li v-for="(elem,index) in list" :key="index" >
                 {{elem}}
-                <button @click='delete_item(index)'>delete</button>
-            </li>
+                
+            </li>      
         </ol>
-        <input  v-validate="'required|names'" name="names" type="text" v-model="new_list">
+        <input   type="text" v-model="new_list">
+        <button @click='delete_item(index)' class="btn" >delete</button>
       
-        <button @click="add_list">add</button>
+        <button v-alert type="success" @click="add_list">add</button>
+        
+    
     </div>
     <script>
         let app = Vue.createApp({
@@ -35,16 +38,24 @@
                     new_list:'',list: ['saurav', 'peeyush', 'akshay',
                             'vishnu', 'preeti', 'sonal', 
                             'parshant', 'gorav',
-                            'raju', 'sham' ]                        
+                            'raju', 'sham' ],
+                    
                 }
+               
             },
             methods: {
                 delete_item(index) {
                     this.list.splice(index,1)
                 },
-                add_list(){
+
+                add_list(){ if(this.new_list)
+                    {                 
                     this.list.push(this.new_list)
-                }
+                    }
+                    if(!this.new_list){
+                        window.alert("field is empty");
+                    }
+                },
             }
         })
 
@@ -67,6 +78,13 @@
             text-transform: uppercase;
             color: black;
 
+        }
+        .btn{
+            color: aliceblue;
+            background-color: rgba(246, 25, 25, 0.782);
+            position: relative;
+            bottom: 1px;
+            left: 15%;
         }
     </style>
 </body>
